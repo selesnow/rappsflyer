@@ -1,0 +1,7 @@
+export(af_get_aggregate_data, af_get_raw_data, af_get_ad_revenue_raw_data, af_set_api_token, af_get_targeting_validation_rules)
+importFrom(httr, GET, status_code, content)
+importFrom(stringr, str_detect, str_glue, str_c)
+importFrom(retry, retry)
+importFrom(dplyr, across, mutate, "%>%")
+importFrom(tidyr, replace_na)
+import(lgr)

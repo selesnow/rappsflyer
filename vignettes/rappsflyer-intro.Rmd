@@ -1,0 +1,94 @@
+---
+title: "Работа с API AppsFlyer на R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Работа с API AppsFlyer на R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rappsflyer)
+```
+
+# Авторизационный токен
+Для работы с API AppsFlyer вам необходимо получить авторизационный токен. Более подробно об этом можно узнать в этой [статье](https://support.appsflyer.com/hc/en-us/articles/360004562377).
+
+Если в кратце то администраторы могут выдавать пользователям токены. 
+
+![Где найти авторизационный токен](https://support.appsflyer.com/hc/article_attachments/360005512157/ApiTokens.jpg)
+
+После того как вам выдали авторизационный токен вы можете установить его в своей R сессии функцией `af_set_api_token()`, передав в качестве единственного аргумента ваш API токен.
+
+Так же вы можете сохранить токен в переменной среды `APPSFLYER_API_TOKEN`, в таком случае при загрузке пакета токен будет прочитан автоматически.
+
+В каждой из функций можно отдельно указывать ваш токен используя аргумент `api_token`, но я не рекомендую хранить токен в коде, это является не лучшей практикой.
+
+# Приложение по которому вы запрашиваете данные
+В каждой из функций есть аргумент `app_id` в который необходимо передавать id вашего приложения, найти id можно в интерфейсе AppsFlyer.
+
+![Где найти ID приложения](http://img.netpeak.ua/alsey/18EA36Z.png)
+
+# Запрос данных из API AppsFlyer
+После того как установили свой API token вы можете запрашивать данные из Pull API. Для большего понимания структуры пакета `rappsflyer` вы можете перейти в интерфейсе AppsFlyer в Интеграции > API Доступ.
+
+![API Доступ](http://img.netpeak.ua/alsey/18EAD7Q.png)
+
+Каждая из функций пакета соответвует определённому разделу API доступа.
+
+## Агрегированные данные (Aggregate (user acquisition and retargeting))
+
+Для работы с агрегированными отчётами используйте функцию `af_get_aggregate_data()`. 
+
+*Аргументы:*
+
+* date_from - начальная дата
+* date_to - конечная дата
+* report_type - тип отчёта
+    * partners_report - Партнеры (медиаисточник)
+    * partners_by_date_report - Партнеры — по датам
+    * daily_report - Ежедневно
+    * geo_report - Геоданные
+    * geo_by_date_report - Геоданные — по датам 
+* additional_fields - дополнительные поля отчёта
+* media_source - фильтр по источнику
+* attribution_touch_type - Установите этот параметр, чтобы получить ключевые показатели эффективности атрибуции (VTA). Например: `attribution_touch_type="impression"`
+* currency - Валюта выручки и стоимость. Агрегированные отчеты Pull API всегда используют валюту приложения.
+* timezone - Часовой пояс
+* retargeting - Получить данные по конверсии ретаргетинга. 
+
+Официальная справка по получению агрегированных отчётов из API AppsFlyer доступна по [ссылке](https://support.appsflyer.com/hc/ru/articles/207034346-Pull-APIs-Pulling-AppsFlyer-Reports-by-APIs).
+
+## Отчеты по сырым данным
+
+Для получения сырых данных используйте функцию `af_get_raw_data()`. 
+
+Доступные в ней типы отчётов:
+
+* installs_report
+* in_app_events_report
+* uninstall_events_report
+
+Официальная справка по получению отчётов с сырыми данными из API AppsFlyer доступна по [ссылке](https://support.appsflyer.com/hc/en-us/articles/360007530258-Using-Pull-API-raw-data).
+
+## Отчёты по рекламной прибыли
+
+Для полученния этой группы отчётов используйте функцию `af_get_ad_revenue_raw_data()`.
+
+[Ссылка](https://support.appsflyer.com/hc/ru/articles/217490046-Ad-revenue-attribution-guide#ad-revenue-raw-data) на официальную документацию.
+
+## Группа отчётов по неудачным установкам и событиям
+
+Для получения отчётов из данной группы используйте функцию `af_get_targeting_validation_rules()`.
+
+Доступные типы отчётов:
+
+* invalid_installs_report
+* invalid_in_app_events_report
