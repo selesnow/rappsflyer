@@ -1,4 +1,4 @@
-# R Пакет для работы с API AppsFlyer
+# rappsflyer - R Пакет для работы с API AppsFlyer <a href='https:/selesnow/github.io/rappsflyer'><img src='https://raw.githubusercontent.com/selesnow/rappsflyer/master/inst/rappsflyer.png' align="right" height="139" /></a>
 
 На данный момент пакет поддерживает загрузку агрегированных и сырых данных из Pull API AppsFlyer.
 
