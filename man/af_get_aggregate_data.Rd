@@ -64,7 +64,7 @@ If TRUE you get retargeting data.
 Your app id from apps flyer.
 }
   \item{api_token}{
-Your AppsFlyer API token.
+Your AppsFlyer API token V1.0 for more details go \href{https://support.appsflyer.com/hc/en-us/articles/360004562377}{link}.
 }
 }
 \author{
