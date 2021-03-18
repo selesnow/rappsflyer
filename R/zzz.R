@@ -10,7 +10,7 @@ rappsflyerWelcomeMessage <- function(){
 
   paste0("\n",
          "---------------------\n",
-         "Welcome to rvkstat version ", utils::packageDescription("rappsflyer")$Version, "\n",
+         "Welcome to rappsflyer version ", utils::packageDescription("rappsflyer")$Version, "\n",
          "\n",
          "Author:           Alexey Seleznev (Head of analytics dept at Netpeak).\n",
          "Telegram channel: https://t.me/R4marketing \n",
@@ -19,13 +19,13 @@ rappsflyerWelcomeMessage <- function(){
          "Facebook:         https://facebook.com/selesnown \n",
          "Linkedin:         https://www.linkedin.com/in/selesnow \n",
          "\n",
-         "Type ?rvkstat for the main documentation.\n",
-         "The github page is: https://github.com/selesnow/rvkstat/\n",
+         "Type ?rappsflyer for the main documentation.\n",
+         "The github page is: https://github.com/selesnow/rappsflyer/\n",
          "\n",
-         "Suggestions and bug-reports can be submitted at: https://github.com/selesnow/rvkstat/issues\n",
+         "Suggestions and bug-reports can be submitted at: https://github.com/selesnow/rappsflyer/issues\n",
          "Or contact: <selesnow@gmail.com>\n",
          "\n",
-         "\tTo suppress this message use:  ", "suppressPackageStartupMessages(library(rvkstat))\n",
+         "\tTo suppress this message use:  ", "suppressPackageStartupMessages(library(rappsflyer))\n",
          "---------------------\n"
   )
 }
