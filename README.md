@@ -19,7 +19,7 @@ GitHub: devtools::install_github('selesnow/rappsflyer')
 
 # Подробная справка
 
-Более подробную справку о работе с пакетом можно получить из виньетки: `vignette('rappsflyer-intro', rappsflyer)`
+Более подробную справку о работе с пакетом можно получить из [виньетки](https://cran.r-project.org/web/packages/rappsflyer/vignettes/rappsflyer-intro.html): `vignette('rappsflyer-intro', rappsflyer)`
 
 ### Автор пакета
 Алексей Селезнёв, Head of analytics dept. at [Netpeak](https://netpeak.net)
