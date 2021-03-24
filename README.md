@@ -16,6 +16,7 @@ GitHub: devtools::install_github('selesnow/rappsflyer')
 * `af_get_raw_data()` - Получить сырые данные
 * `af_get_ad_revenue_raw_data()` - Получить отчёты о доходе с рекламы
 * `af_get_targeting_validation_rules()` - Получить отчёт о ошибочных установках и событиях
+*  `af_get_data()` - Получить данные из Master API (функция на стадии тестирования)
 
 # Подробная справка
 
