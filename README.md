@@ -2,6 +2,13 @@
 
 На данный момент пакет поддерживает загрузку агрегированных и сырых данных из Pull API AppsFlyer.
 
+# Установка пакета
+
+`rappsflyer` можно установить как с GitHub, так и с CRAN:
+
+CRAN: install.packages('rappsflyer')
+GitHub: devtools::install_github('selesnow/rappsflyer')
+
 # Функции пакета
 
 * `af_set_api_token()` - Установить API токен
