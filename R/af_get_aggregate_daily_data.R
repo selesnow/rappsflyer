@@ -12,7 +12,7 @@ af_get_aggregate_data <- function(
   api_token              = getOption("apps_flyer_api_key")
 ) {
 
-  # docs https://support.appsflyer.com/hc/ru/articles/207034346-Pull-APIs-Pulling-AppsFlyer-Reports-by-APIs
+  # docs https://support.appsflyer.com/hc/en-us/articles/201583105-Pull-API-aggregate-data
   if (length(additional_fields) > 1) {
     additional_fields <- str_c(additional_fields, collapse=",")
   }
@@ -25,24 +25,25 @@ af_get_aggregate_data <- function(
     {
       # compose query
       answer <- GET(
-        str_glue('https://hq.appsflyer.com/export/{app_id}/{report_type}/v5'),
-          query = list(
-            api_token              = api_token,
-            from                   = date_from,
-            to                     = date_to,
-            timezone               = timezone,
-            media_source           = media_source,
-            attribution_touch_type = attribution_touch_type,
-            additional_fields      = additional_fields,
-            currency               = currency,
-            reattr                 = retargeting
-          )
+        str_glue('https://hq1.appsflyer.com/api/agg-data/export/app/{app_id}/{report_type}/v5'),
+        add_headers(Authorization = paste("Bearer", api_token)),
+        query = list(
+          from                   = date_from,
+          to                     = date_to,
+          timezone               = timezone,
+          media_source           = media_source,
+          attribution_touch_type = attribution_touch_type,
+          additional_fields      = additional_fields,
+          currency               = currency,
+          reattr                 = retargeting
+        )
       )
 
       # check limit error
       if ( status_code(answer) != 200 ) {
 
-        msg <- ifelse( str_detect(string = content(answer, encoding = "UTF-8"), "^Limit reached.*"), "Limit reached", content(answer, encoding = "UTF-8") )
+        msg <- ifelse( str_detect(string = content(answer, "text", encoding = "UTF-8"), "^Limit reached.*"), "Limit reached", content(answer, "text", encoding = "UTF-8") )
+        lg$error(content(answer, "text", encoding = "UTF-8"))
         stop(msg)
 
       }
@@ -65,6 +66,3 @@ af_get_aggregate_data <- function(
   return(data)
 
 }
-
-
-

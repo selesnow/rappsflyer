@@ -5,28 +5,28 @@ af_get_data <- function(
   metrics    = c("impressions", "clicks", "installs", "sessions", "loyal_users", "cost", "revenue", "uninstalls"),
   filters    = NULL,
   currency   = NULL,
-  timezone  = "Europe/Moscow",
+  timezone   = "Europe/Moscow",
   app_id     = getOption("apps_flyer_app_id"),
   api_token  = getOption("apps_flyer_api_key")
 ) {
 
-  # https://support.appsflyer.com/hc/en-us/articles/213223166-Master-API-user-acquisition-metrics-via-API
+  # docs https://dev.appsflyer.com/hc/docs/master-api-overview
 
   # send api call
   retry(
     {
-      answer <- GET(url = "https://hq.appsflyer.com/export/master_report/v4",
-                    query = list(
-                      api_token = api_token,
-                      app_id    = app_id,
-                      from      = date_from,
-                      to        = date_to,
-                      groupings = str_c(dimensions, collapse = ","),
-                      kpis      = str_c(metrics, collapse = ","),
-                      filters   = filters,
-                      currency  = currency
-                    )
-                  )
+      answer <- GET(
+        url = str_glue("https://hq1.appsflyer.com/api/master-agg-data/v4/app/{app_id}"),
+        add_headers(Authorization = paste("Bearer", api_token)),
+        query = list(
+          from      = date_from,
+          to        = date_to,
+          groupings = str_c(dimensions, collapse = ","),
+          kpis      = str_c(metrics, collapse = ","),
+          filters   = filters,
+          currency  = currency
+        )
+      )
 
       # check limit error
       if ( status_code(answer) != 200 ) {
@@ -48,4 +48,3 @@ af_get_data <- function(
 
   return(data)
 }
-

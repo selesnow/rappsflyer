@@ -6,12 +6,12 @@ af_get_ad_revenue_raw_data <- function(
   additional_fields      = c("device_model", "keyword_id", "store_reinstall", "deeplink_url", "oaid", "ad_unit", "segment", "placement", "monetization_network", "impressions", "mediation_network", "is_lat"),
   timezone               = "Europe/Moscow",
   retargeting            = NULL,
-  maximum_rows           = 1000000,
+  maximum_rows           = 200000,
   app_id                 = getOption("apps_flyer_app_id"),
   api_token              = getOption("apps_flyer_api_key")
 ) {
 
-  # docs https://support.appsflyer.com/hc/ru/articles/207034346-Pull-APIs-Pulling-AppsFlyer-Reports-by-APIs
+  # docs https://support.appsflyer.com/hc/en-us/articles/201583115-Pull-API-raw-data
   if (length(additional_fields) > 1) {
     additional_fields <- str_c(additional_fields, collapse=",")
   }
@@ -29,9 +29,9 @@ af_get_ad_revenue_raw_data <- function(
     {
       # compose query
       answer <- GET(
-        str_glue('https://hq.appsflyer.com/export/{app_id}/{report_type}/v5'),
+        str_glue('https://hq1.appsflyer.com/api/raw-data/export/app/{app_id}/{report_type}/v5'),
+        add_headers(Authorization = paste("Bearer", api_token)),
         query = list(
-          api_token              = api_token,
           from                   = date_from,
           to                     = date_to,
           timezone               = timezone,
